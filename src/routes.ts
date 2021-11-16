@@ -7,7 +7,11 @@ routes.get('/api/books', async (req: Request, res: Response) => {
   let books;
   if (req.query.tag) {
     books = await BookController.instance.ListBooksByTag(String(req.query.tag));
-  } else {
+  }
+  else if (req.query.title) {
+    books = await BookController.instance.ListBookByTitle(String(req.query.title));
+  }
+  else {
     books = await BookController.instance.ListAllBooks();
   }
   const statusCode = books.length ? 200 : 204;
