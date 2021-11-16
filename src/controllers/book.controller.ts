@@ -25,6 +25,12 @@ class BookController {
     return books;
   }
 
+  public async ListBookByTitle(title: string): Promise<IBook[]> {
+    const books = await BookModel.find({ title: new RegExp(title, 'gi') });
+
+    return books;
+  }
+
   public async RegisterNewBook(book: IBook): Promise<IBook> {
     const bookCreated = await BookModel.create(book);
 
